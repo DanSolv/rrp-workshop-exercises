@@ -71,11 +71,15 @@ opts <- parse_args(OptionParser(option_list = option_list))
 
 # Check that the specified input files are present; 
 # exit with error if not using `stop()`
-if(!file.exists(opts$maf)){
-  stop("The specified MAF file does not exist.")
-}
+#if(!file.exists(opts$maf)){
+#  stop("The specified MAF file does not exist.")
+#}
 
 
+stopifnot(
+  "The specified MAF file does not exist." = file.exists(opts$maf),
+  "The MAF file doesn't end with .maf" = opts$maf != "foo.txt"
+)
 # Define constants --------------------------------------
 
 # Define the MAF `Consequence` values we are interested in and their classification
